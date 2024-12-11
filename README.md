@@ -1,6 +1,6 @@
 # CISA Vulnrichment
 
-The CISA Vulnrichment project is the public repository of CISA's enrichment of public CVE records through CISA's ADP (Authorized Data Publisher) container. In this phase of the project, CISA is assessing new and recent CVEs and adding key [SSVC](https://www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc) decision points. Once scored, some higher-risk CVEs will also receive enrichment of [CWE](https://cwe.mitre.org/), [CVSS](https://www.first.org/cvss/), and [CPE](https://csrc.nist.gov/publications/search?keywords-lg=CPE) data points, where possible.
+The CISA Vulnrichment project is the public repository of CISA's enrichment of public CVE records through CISA's ADP (Authorized Data Publisher) container. In this phase of the project, CISA is assessing new and recent CVEs and adding key [SSVC](https://www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc) decision points. Once scored, some higher-risk CVEs will also receive enrichment of [CWE](https://cwe.mitre.org/) and/or [CVSS](https://www.first.org/cvss/) data points, where possible.
 
 Producers and consumers of this CVE data should already be familiar with the current [CVE Record Format](https://www.cve.org/AllResources/CveServices#CveRecordFormat) and can access this data in the normal ways, including the [GitHub API](https://docs.github.com/en/rest/quickstart) and the [CVE Services API](https://cveawg-test.mitre.org/api-docs/). Note that the results of Vulnrichment are being pushed back to the CVE corpus, through the recently (2024) launched [ADP Program](https://www.cve.org/Media/News/item/blog/2024/06/04/CISA-Added-as-CVE-Authorized-Data-Publisher). Downstream consumers need not fork and track this GitHub repo if they are already consuming live CVE data.
 
@@ -10,7 +10,7 @@ This project is under active development, so keep an eye on this [README.md](htt
 
 First, CISA will take each CVE through an SSVC scoring process.
 
-Next, for those CVEs that are rated as "Total Technical Impact," "Automatable," or have "Exploitation" values of "Proof of Concept" or "Active Exploitation," further analysis will be conducted. CISA will determine if there is enough information to assert a specific CWE identifier, a CVSS score, or a CPE string. In some cases, CISA will provide these metrics even to vulnerabilities that do not rate as high risk on any of these decision points.
+Next, for those CVEs that are rated as "Total Technical Impact," "Automatable," or have "Exploitation" values of "Proof of Concept" or "Active Exploitation," further analysis will be conducted. CISA will determine if there is enough information to assert a specific CWE identifier and/or a CVSS score. In some cases, CISA will provide these metrics even to vulnerabilities that do not rate as high risk on any of these decision points.
 
 For those CVEs that do not already have these fields populated by the originating CNA, CISA will populate the associated ADP container with those values when there is enough supporting evidence to do so. At no point will CISA overwrite the originating CNA's data in the original CNA container in the CVE record.
 
@@ -131,6 +131,8 @@ CVE-2024-0043 is an example CVE that had a CVSS calculation added by CISA, start
 ```
 
 #### CPE strings
+
+Please note that as of December 10, 2024, CISA will no longer be adding CPE strings to the enriched dataset. Previously enriched data may still contain CPE information. The notes here regarding CPE strings are for historical purposes.
 
 CVE-2024-1347 is an example CVE that had a CPE string added by CISA, starting on [line 61](2024/1xxx/CVE-2024-1347.json#L61-L63).
 
