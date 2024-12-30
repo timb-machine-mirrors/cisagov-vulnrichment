@@ -14,7 +14,7 @@ Next, for those CVEs that are rated as "Total Technical Impact," "Automatable," 
 
 For those CVEs that do not already have these fields populated by the originating CNA, CISA will populate the associated ADP container with those values when there is enough supporting evidence to do so. At no point will CISA overwrite the originating CNA's data in the original CNA container in the CVE record.
 
-This [flowchart](assets/vulnrichment_big.dot.svg) ([dot source](assets/vulnrichment_big.dot)) illustrates the Vulnrichment process. Please note that the details in the flowchart are subject to change as Vulnrichment processes are refined.
+These [flowcharts](flowcharts.md) illustrate the Vulnrichment process. Please note that the details in the flowcharts are subject to change as Vulnrichment processes are refined.
 
 ### Some example CVEs
 
@@ -109,7 +109,7 @@ CVE-2024-3477 is an example CVE which the originating CNA did not provide a CWE,
 ]
 ```
 
-#### CVSS calculations
+#### CVSS scores
 
 CVE-2024-0043 is an example CVE that had a CVSS calculation added by CISA, starting on [line 30](2024/0xxx/CVE-2024-0043.json#L30-L44). Again, this is based on the context of the vulnerability information available at the time of analysis.
 
@@ -142,30 +142,9 @@ CVE-2024-1347 is an example CVE that had a CPE string added by CISA, starting on
 ]
 ```
 
-We have more to say about CPE strings below.
-
 #### No additional updates
 
 CVE-2024-2905 is an example CVE that already had CWE, CVSS, and CPE metrics (see [here](2024/2xxx/CVE-2024-2905.json)) when CISA performed the SSVC triage step, and it's not on the KEV, so nothing more needed to be added. Good job, Red Hat CNA!
-
-### A note about CPE
-
-Of all the enriched data types, consistent and universal software identification, currently in the form of CPE, is the most difficult to accurately generate and maintain. CISA will assess and improve CPE enrichment as this project progresses. There are three sets of CPE data, all of which conform to the [CPE Specification](https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf):
-
-1. The official [NVD CPE Dictionary](https://nvd.nist.gov/products/cpe)
-2. CPE entries that are present in NVD data but not in the Dictionary
-3. CPE entries created by CISA
-
-Due to the current design of the CVE Record Format, adding CPE strings (to the `cpes` list) effectively requires us to also create [`affected`](https://cveproject.github.io/cve-schema/schema/docs/#oneOf_i0_containers_cna_affected) and [`versions`](https://cveproject.github.io/cve-schema/schema/docs/#oneOf_i0_containers_cna_affected_items_versions) arrays. This increases the possibility of disagreement between sources of vulnerability status and software identity information, including:
-
-* the CVE description (CNA)
-* `affected` data (CNA)
-* `cpes` data (ADP)
-* `affected` data (ADP)
-* external references, like an advisory from the CNA
-* external references from a party other than the CNA
-
-We'll do what we can to fix or improve data in our control, please open an [issue](https://github.com/cisagov/vulnrichment/issues) if you notice trouble with ADP-provided data.
 
 ### A note about updated CVE entries
 
@@ -179,6 +158,6 @@ The version field in SSVC data follows the major.minor.patch convention, where m
 
 Updates to the decision tree to conform with updates to SSVC will result in changes to the version string. Users consuming this data are urged to observe the version when decoding SSVC scores to determine how to validate and process the JSON data.
 
-## Issues and Pull Requests
+## Issues and pull requests
 
-We want to hear from you, the IT cybersecurity professional community, about Vulnrichment and ADP! If you see something, please feel free to say something in the [Issues](https://github.com/cisagov/vulnrichment/issues), or even better, open a [Pull Request](https://github.com/cisagov/vulnrichment/pulls) with your suggested fix. Note that if you have an issue with the data from the CNA container, you are encouraged to take that issue up with the [responsible CNA](https://www.cve.org/PartnerInformation/ListofPartners) directly.
+We want to hear from you, the IT cybersecurity professional community, about Vulnrichment and ADP! If you see something, please feel free to say something in the [Issues](https://github.com/cisagov/vulnrichment/issues), or even better, open a [pull request](https://github.com/cisagov/vulnrichment/pulls) with your suggested fix. Note that if you have an issue with the data from the CNA container, you are encouraged to take that issue up with the [responsible CNA](https://www.cve.org/PartnerInformation/ListofPartners) directly.
